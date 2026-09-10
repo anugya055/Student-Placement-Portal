@@ -1,0 +1,605 @@
+/* =========================================
+   APPLICATION FORM PAGE
+   Dark Navy + Teal Theme
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* =========================================
+   Main Page
+========================================= */
+
+.application-page {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* =========================================
+   Sidebar
+========================================= */
+
+.application-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  background: #0f172a;
+  color: white;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* Logo */
+
+.application-sidebar .sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px 25px;
+  border-bottom: 1px solid #334155;
+}
+
+.application-sidebar .logo-icon {
+  width: 42px;
+  height: 42px;
+  background: #14b8a6;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.application-sidebar .sidebar-logo h2 {
+  margin: 0;
+  font-size: 20px;
+  color: white;
+}
+
+.application-sidebar .sidebar-logo h2 span {
+  color: #5eead4;
+}
+
+/* Navigation */
+
+.application-sidebar .sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 25px;
+}
+
+.application-sidebar .sidebar-menu button,
+.application-sidebar .sidebar-bottom button {
+  width: 100%;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #cbd5e1;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.application-sidebar .sidebar-menu button:hover,
+.application-sidebar .sidebar-bottom button:hover {
+  background: #134e4a;
+  color: white;
+}
+
+.application-sidebar .sidebar-bottom {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #334155;
+}
+
+/* =========================================
+   Main Content
+========================================= */
+
+.application-main {
+  margin-left: 250px;
+  min-height: 100vh;
+  padding: 35px 45px;
+  max-width: calc(100% - 250px);
+}
+
+/* =========================================
+   Header
+========================================= */
+
+.application-header {
+  margin-bottom: 25px;
+}
+
+.back-btn {
+  border: none;
+  background: transparent;
+  color: #0f766e;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.back-btn:hover {
+  color: #14b8a6;
+}
+
+.application-header h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #0f172a;
+}
+
+.application-header p {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* =========================================
+   Selected Job Card
+========================================= */
+
+.selected-job-card {
+  background: white;
+  border: 1px solid #dbe4ea;
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+}
+
+.selected-job-logo {
+  width: 65px;
+  height: 65px;
+  background: #134e4a;
+  color: #5eead4;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.selected-job-info h2 {
+  margin: 0 0 5px;
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.selected-job-info p {
+  margin: 0 0 12px;
+  color: #0f766e;
+  font-weight: 600;
+}
+
+.selected-job-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.selected-job-details span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* =========================================
+   Form
+========================================= */
+
+.application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =========================================
+   Form Section
+========================================= */
+
+.form-section {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.form-section-title {
+  margin-bottom: 22px;
+}
+
+.form-section-title h2 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-size: 20px;
+}
+
+.form-section-title p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* =========================================
+   Form Grid
+========================================= */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* =========================================
+   Form Group
+========================================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 13px 14px;
+  background: white;
+  color: #0f172a;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #14b8a6;
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* =========================================
+   Resume Upload
+========================================= */
+
+.resume-upload {
+  border: 2px dashed #94a3b8;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  background: #f8fafc;
+  transition: 0.3s;
+}
+
+.resume-upload:hover {
+  border-color: #14b8a6;
+  background: #f0fdfa;
+}
+
+.resume-upload label {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #14b8a6;
+  color: white;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.resume-upload label:hover {
+  background: #0f766e;
+}
+
+.resume-upload input {
+  display: none;
+}
+
+.resume-name {
+  margin: 15px 0 0;
+  color: #0f766e;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================================
+   Submit Area
+========================================= */
+
+.form-submit {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 10px 0 30px;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-btn {
+  background: white;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.cancel-btn:hover {
+  background: #f1f5f9;
+}
+
+.submit-btn {
+  background: #14b8a6;
+  color: white;
+  border: none;
+}
+
+.submit-btn:hover {
+  background: #0f766e;
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   Error Page
+========================================= */
+
+.job-details-error {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  background: #f8fafc;
+}
+
+.error-icon {
+  font-size: 55px;
+  margin-bottom: 15px;
+}
+
+.job-details-error h2 {
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.job-details-error p {
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.job-details-error button {
+  background: #14b8a6;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.job-details-error button:hover {
+  background: #0f766e;
+}
+
+/* =========================================
+   Success Page
+========================================= */
+
+.application-success {
+  min-height: 100vh;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.success-icon {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: #14b8a6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.application-success h1 {
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.application-success p {
+  color: #64748b;
+  max-width: 550px;
+  line-height: 1.6;
+}
+
+.success-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.success-buttons button {
+  border: none;
+  background: #14b8a6;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.success-buttons button:hover {
+  background: #0f766e;
+}
+
+/* =========================================
+   Tablet
+========================================= */
+
+@media (max-width: 900px) {
+
+  .application-sidebar {
+    width: 210px;
+  }
+
+  .application-main {
+    margin-left: 210px;
+    max-width: calc(100% - 210px);
+    padding: 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 700px) {
+
+  .application-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .application-sidebar .sidebar-logo {
+    padding-bottom: 15px;
+  }
+
+  .application-sidebar .sidebar-menu {
+    flex-direction: row;
+    overflow-x: auto;
+    margin-top: 15px;
+  }
+
+  .application-sidebar .sidebar-menu button {
+    white-space: nowrap;
+    width: auto;
+  }
+
+  .application-sidebar .sidebar-bottom {
+    display: none;
+  }
+
+  .application-main {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 20px 15px;
+  }
+
+  .application-header h1 {
+    font-size: 26px;
+  }
+
+  .selected-job-card {
+    padding: 18px;
+  }
+
+  .selected-job-details {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .form-section {
+    padding: 18px;
+  }
+
+  .form-submit {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+  }
+
+  .success-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .success-buttons button {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   Small Mobile
+========================================= */
+
+@media (max-width: 400px) {
+
+  .application-main {
+    padding: 15px 10px;
+  }
+
+  .selected-job-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .selected-job-logo {
+    width: 55px;
+    height: 55px;
+  }
+
+  .application-header h1 {
+    font-size: 23px;
+  }
+}

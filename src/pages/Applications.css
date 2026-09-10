@@ -1,0 +1,641 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* ================================
+   MAIN PAGE
+================================ */
+
+.applications-page {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.applications-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  background: #0f172a;
+  color: white;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px 25px;
+  border-bottom: 1px solid #334155;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: #14b8a6;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.sidebar-logo h2 {
+  margin: 0;
+  color: white;
+  font-size: 20px;
+}
+
+.sidebar-logo h2 span {
+  color: #5eead4;
+}
+
+/* Navigation */
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 25px;
+}
+
+.sidebar-menu button,
+.sidebar-bottom button {
+  width: 100%;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #cbd5e1;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar-menu button:hover,
+.sidebar-bottom button:hover {
+  background: #134e4a;
+  color: white;
+}
+
+.sidebar-menu button.active {
+  background: #14b8a6;
+  color: white;
+  font-weight: 600;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #334155;
+}
+
+/* ================================
+   MAIN CONTENT
+================================ */
+
+.applications-main {
+  margin-left: 250px;
+  max-width: calc(100% - 250px);
+  min-height: 100vh;
+  padding: 40px 45px;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.applications-header {
+  margin-bottom: 30px;
+}
+
+.applications-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  color: #0f172a;
+}
+
+.applications-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* ================================
+   APPLICATION LIST
+================================ */
+
+.applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ================================
+   APPLICATION CARD
+================================ */
+
+.application-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+  transition: 0.3s;
+}
+
+.application-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+}
+
+/* Company Logo */
+
+.application-company-logo {
+  width: 65px;
+  height: 65px;
+  flex-shrink: 0;
+  background: #134e4a;
+  color: #5eead4;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+  font-weight: bold;
+}
+
+/* Application Information */
+
+.application-info {
+  flex: 1;
+}
+
+.application-info h2 {
+  margin: 0 0 5px;
+  color: #0f172a;
+  font-size: 20px;
+}
+
+.application-info h3 {
+  margin: 0 0 12px;
+  color: #0f766e;
+  font-size: 15px;
+}
+
+.application-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.application-meta span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* ================================
+   STATUS
+================================ */
+
+.application-status {
+  min-width: 120px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge.under-review {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.shortlisted {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-badge.selected {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ================================
+   VIEW BUTTON
+================================ */
+
+.view-btn {
+  border: none;
+  background: #14b8a6;
+  color: white;
+  padding: 10px 17px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: #0f766e;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.applications-footer {
+  margin-top: 25px;
+}
+
+.browse-jobs-btn {
+  border: none;
+  background: #0f172a;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.browse-jobs-btn:hover {
+  background: #134e4a;
+}
+
+/* ================================
+   APPLICATION MODAL
+================================ */
+
+.application-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  z-index: 2000;
+}
+
+.application-modal {
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.3);
+}
+
+/* Modal Header */
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 22px 25px;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 2;
+}
+
+.modal-header h2 {
+  margin: 0 0 5px;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.modal-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.modal-close {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Modal Job */
+
+.modal-job {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 25px;
+  padding: 18px;
+  background: #f0fdfa;
+  border: 1px solid #ccfbf1;
+  border-radius: 12px;
+}
+
+.modal-company-logo {
+  width: 55px;
+  height: 55px;
+  background: #134e4a;
+  color: #5eead4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modal-job h3 {
+  margin: 0 0 5px;
+  color: #0f172a;
+}
+
+.modal-job p {
+  margin: 0;
+  color: #0f766e;
+  font-weight: 600;
+}
+
+/* Modal Status */
+
+.modal-status-row {
+  margin: 0 25px 20px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-status-row > span:first-child {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Modal Section */
+
+.modal-section {
+  margin: 0 25px 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-section h3 {
+  margin: 0 0 15px;
+  color: #0f172a;
+  font-size: 17px;
+}
+
+/* Modal Grid */
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.modal-grid > div {
+  padding: 13px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.modal-grid span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.modal-grid strong {
+  color: #0f172a;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+/* Skills */
+
+.modal-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal-skill {
+  padding: 7px 12px;
+  background: #ccfbf1;
+  color: #0f766e;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Cover Letter */
+
+.modal-cover-letter {
+  margin: 0;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Modal Footer */
+
+.modal-footer {
+  padding: 5px 25px 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-close-btn {
+  border: none;
+  background: #14b8a6;
+  color: white;
+  padding: 11px 25px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-close-btn:hover {
+  background: #0f766e;
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 900px) {
+
+  .applications-sidebar {
+    width: 210px;
+  }
+
+  .applications-main {
+    margin-left: 210px;
+    max-width: calc(100% - 210px);
+    padding: 30px 25px;
+  }
+
+  .application-card {
+    flex-wrap: wrap;
+  }
+
+  .application-info {
+    min-width: 60%;
+  }
+
+  .application-status {
+    min-width: auto;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 700px) {
+
+  .applications-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .sidebar-logo {
+    padding-bottom: 15px;
+  }
+
+  .sidebar-menu {
+    flex-direction: row;
+    overflow-x: auto;
+    margin-top: 15px;
+  }
+
+  .sidebar-menu button {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .applications-main {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 25px 15px;
+  }
+
+  .applications-header h1 {
+    font-size: 27px;
+  }
+
+  .application-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .application-info {
+    width: 100%;
+  }
+
+  .application-meta {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .application-status {
+    width: 100%;
+  }
+
+  .view-btn {
+    width: 100%;
+  }
+
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .application-modal-overlay {
+    padding: 10px;
+  }
+
+  .application-modal {
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    padding: 18px;
+  }
+
+  .modal-job {
+    margin: 15px 18px;
+  }
+
+  .modal-status-row {
+    margin: 0 18px 15px;
+  }
+
+  .modal-section {
+    margin: 0 18px 18px;
+  }
+
+  .modal-footer {
+    padding: 5px 18px 18px;
+  }
+
+  .modal-close-btn {
+    width: 100%;
+  }
+}
