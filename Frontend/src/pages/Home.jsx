@@ -1,13 +1,34 @@
+
+
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
 function Home() {
+  const [showLoginMenu, setShowLoginMenu] = useState(false);
+  const loginRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        loginRef.current &&
+        !loginRef.current.contains(event.target)
+      ) {
+        setShowLoginMenu(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="home">
-
-      {/* ================= NAVBAR ================= */}
       <nav className="navbar">
-
         <div className="logo">
           <span>🎓</span> PlacementHub
         </div>
@@ -17,22 +38,49 @@ function Home() {
           <a href="#features">Features</a>
           <a href="#how-it-works">How It Works</a>
           <a href="#companies">Companies</a>
-          <Link to="/login" className="login-btn">
-            Login
-          </Link>
+
+          {/* Interactive Login Dropdown */}
+          <div className="login-dropdown" ref={loginRef}>
+            <button
+              type="button"
+              className="login-btn"
+              aria-expanded={showLoginMenu}
+              aria-haspopup="true"
+              onClick={() => setShowLoginMenu((prev) => !prev)}
+            >
+              Login
+              <span className={showLoginMenu ? "arrow rotate" : "arrow"}>
+                ▼
+              </span>
+            </button>
+
+            {showLoginMenu && (
+              <div className="login-menu">
+                <Link
+                  to="/login"
+                  onClick={() => setShowLoginMenu(false)}
+                >
+                  <span>🎓</span> Student Login
+                </Link>
+
+                <Link
+                  to="/admin-login"
+                  onClick={() => setShowLoginMenu(false)}
+                >
+                  <span>🛡️</span> Admin Login
+                </Link>
+              </div>
+            )}
+          </div>
+
           <Link to="/register" className="register-btn">
             Get Started
           </Link>
         </div>
-
       </nav>
-
-
-      {/* ================= HERO SECTION ================= */}
+       {/* ================= HERO SECTION ================= */}
       <section className="hero">
-
         <div className="hero-content">
-
           <span className="hero-badge">
             🚀 Your Career Starts Here
           </span>
@@ -49,7 +97,6 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-
             <Link to="/register" className="primary-btn">
               Get Started →
             </Link>
@@ -57,14 +104,10 @@ function Home() {
             <a href="#how-it-works" className="secondary-btn">
               Learn More
             </a>
-
           </div>
-
         </div>
 
-
         <div className="hero-card">
-
           <div className="card-header">
             <div>
               <span className="small-text">Placement Overview</span>
@@ -79,7 +122,6 @@ function Home() {
               <span>Applications</span>
               <strong>24</strong>
             </div>
-
             <div className="progress-bar">
               <div className="progress-fill application"></div>
             </div>
@@ -90,7 +132,6 @@ function Home() {
               <span>Interviews</span>
               <strong>8</strong>
             </div>
-
             <div className="progress-bar">
               <div className="progress-fill interview"></div>
             </div>
@@ -101,20 +142,15 @@ function Home() {
               <span>Offers</span>
               <strong>3</strong>
             </div>
-
             <div className="progress-bar">
               <div className="progress-fill offer"></div>
             </div>
           </div>
-
         </div>
-
       </section>
-
 
       {/* ================= STATS ================= */}
       <section className="stats">
-
         <div className="stat">
           <h2>500+</h2>
           <p>Students</p>
@@ -134,18 +170,12 @@ function Home() {
           <h2>85%</h2>
           <p>Placement Rate</p>
         </div>
-
       </section>
-
 
       {/* ================= FEATURES ================= */}
       <section id="features" className="section">
-
         <div className="section-heading">
-
-          <span className="section-label">
-            FEATURES
-          </span>
+          <span className="section-label">FEATURES</span>
 
           <h2>
             Everything You Need
@@ -156,12 +186,9 @@ function Home() {
             Manage your placement journey from profile creation
             to getting your dream job.
           </p>
-
         </div>
 
-
         <div className="features-grid">
-
           <div className="feature-card">
             <div className="feature-icon">👤</div>
             <h3>Student Profile</h3>
@@ -170,7 +197,6 @@ function Home() {
               skills, education and resume.
             </p>
           </div>
-
 
           <div className="feature-card">
             <div className="feature-icon">💼</div>
@@ -181,7 +207,6 @@ function Home() {
             </p>
           </div>
 
-
           <div className="feature-card">
             <div className="feature-icon">📋</div>
             <h3>Easy Applications</h3>
@@ -190,7 +215,6 @@ function Home() {
               manage all your applications.
             </p>
           </div>
-
 
           <div className="feature-card">
             <div className="feature-icon">🎯</div>
@@ -201,7 +225,6 @@ function Home() {
             </p>
           </div>
 
-
           <div className="feature-card">
             <div className="feature-icon">📊</div>
             <h3>Placement Dashboard</h3>
@@ -211,7 +234,6 @@ function Home() {
             </p>
           </div>
 
-
           <div className="feature-card">
             <div className="feature-icon">🔔</div>
             <h3>Notifications</h3>
@@ -220,120 +242,83 @@ function Home() {
               application status and interviews.
             </p>
           </div>
-
         </div>
-
       </section>
-
 
       {/* ================= HOW IT WORKS ================= */}
       <section id="how-it-works" className="how-section">
-
         <div className="section-heading">
-
-          <span className="section-label">
-            HOW IT WORKS
-          </span>
+          <span className="section-label">HOW IT WORKS</span>
 
           <h2>
             Start Your Placement
             <span> Journey</span>
           </h2>
-
         </div>
 
-
         <div className="steps">
-
           <div className="step">
             <div className="step-number">01</div>
-
             <h3>Create Profile</h3>
-
             <p>
               Register and create your professional
               student profile.
             </p>
           </div>
 
-
           <div className="step">
             <div className="step-number">02</div>
-
             <h3>Explore Jobs</h3>
-
             <p>
               Find companies and opportunities
               that match your eligibility.
             </p>
           </div>
 
-
           <div className="step">
             <div className="step-number">03</div>
-
             <h3>Apply</h3>
-
             <p>
               Apply for jobs and track your
               application status.
             </p>
           </div>
 
-
           <div className="step">
             <div className="step-number">04</div>
-
             <h3>Get Hired</h3>
-
             <p>
               Attend interviews and take the
               next step toward your career.
             </p>
           </div>
-
         </div>
-
       </section>
-
 
       {/* ================= COMPANIES ================= */}
       <section id="companies" className="section companies">
-
         <div className="section-heading">
-
-          <span className="section-label">
-            TOP RECRUITERS
-          </span>
+          <span className="section-label">TOP RECRUITERS</span>
 
           <h2>
             Connect With
             <span> Leading Companies</span>
           </h2>
-
         </div>
 
-
         <div className="company-grid">
-
           <div className="company">TCS</div>
           <div className="company">Infosys</div>
           <div className="company">Wipro</div>
           <div className="company">Accenture</div>
           <div className="company">Cognizant</div>
           <div className="company">Capgemini</div>
-
         </div>
-
       </section>
-
 
       {/* ================= CTA ================= */}
       <section className="cta">
-
-        <h2>
-          Ready to Start Your Career?
-        </h2>
+        <h2>Ready to Start Your Career?</h2>
 
         <p>
           Create your profile and discover opportunities
@@ -343,13 +328,10 @@ function Home() {
         <Link to="/register" className="cta-btn">
           Create Your Account →
         </Link>
-
       </section>
-
 
       {/* ================= FOOTER ================= */}
       <footer>
-
         <div className="footer-logo">
           🎓 PlacementHub
         </div>
@@ -362,7 +344,6 @@ function Home() {
         <div className="footer-bottom">
           © 2026 PlacementHub. All rights reserved.
         </div>
-
       </footer>
 
     </div>

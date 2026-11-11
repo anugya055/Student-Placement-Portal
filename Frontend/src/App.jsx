@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -13,6 +14,11 @@ import JobDetails from "./pages/JobDetails";
 import ApplicationForm from "./pages/ApplicationForm";
 import Applications from "./pages/Applications";
 import ApplicationDetails from "./pages/ApplicationDetails";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+
+// Protected Route
+import AdminProtectedRoute from "./pages/AdminProtectedRoute";
 
 function App() {
   return (
@@ -22,7 +28,7 @@ function App() {
         {/* Home */}
         <Route path="/" element={<Home />} />
 
-        {/* Authentication */}
+        {/* Student Authentication */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -35,11 +41,28 @@ function App() {
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/job-details" element={<JobDetails />} />
 
-        {/* Application */}
+        {/* Applications */}
         <Route path="/apply" element={<ApplicationForm />} />
         <Route path="/applications" element={<Applications />} />
-        <Route path="/application-details" element={<ApplicationDetails />}
-       />
+        <Route
+          path="/application-details"
+          element={<ApplicationDetails />}
+        />
+
+        {/* Admin Login */}
+        <Route path="/admin-login" element={<AdminLogin />} />
+
+        {/* Protected Admin Dashboard */}
+        <Route element={<AdminProtectedRoute />}>
+          <Route
+            path="/admin-dashboard"
+            element={<AdminDashboard />}
+          />
+          <Route
+            path="/AdminDashboard"
+            element={<AdminDashboard />}
+          />
+        </Route>
 
       </Routes>
     </BrowserRouter>

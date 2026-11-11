@@ -1,0 +1,774 @@
+
+/* Main Dashboard */
+.admin-dashboard {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* Dashboard Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.admin-heading h1 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 30px;
+}
+
+.admin-heading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* Admin Logout Button */
+.admin-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 22px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.admin-logout-btn span {
+  font-size: 19px;
+}
+
+.admin-logout-btn:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3);
+}
+
+.admin-logout-btn:active {
+  transform: translateY(0);
+}
+
+/* Dashboard Statistics */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.admin-card {
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.admin-card h3 {
+  margin: 0 0 12px;
+  color: #64748b;
+  font-size: 15px;
+}
+
+.admin-card p {
+  margin: 0;
+  color: #0f766e;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* Applications Section */
+.admin-applications {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.admin-applications h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+/* Application Cards */
+.admin-application-card {
+  margin-bottom: 18px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: box-shadow 0.25s ease;
+}
+
+.admin-application-card:hover {
+  box-shadow: 0 5px 16px rgba(15, 23, 42, 0.07);
+}
+
+.admin-application-card h3 {
+  margin: 0 0 15px;
+  color: #0f766e;
+  font-size: 19px;
+}
+
+.admin-application-card p {
+  margin: 9px 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.admin-application-card strong {
+  color: #1e293b;
+}
+
+/* Application Status Update */
+.status-update-section {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-update-section label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.status-update-section select {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #0d9488;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  outline: none;
+  cursor: pointer;
+}
+
+.status-update-section button {
+  padding: 11px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #0d9488;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.status-update-section button:hover {
+  background: #0f766e;
+}
+
+.status-update-section button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.success-message {
+  color: #15803d;
+  font-size: 13px;
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 14px;
+}
+
+/* Search and Filter Section */
+.application-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 14px;
+  margin: 20px 0 12px;
+}
+
+.application-filters input,
+.application-filters select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+  outline: none;
+}
+
+.application-filters input:focus,
+.application-filters select:focus {
+  border-color: #0d9488;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
+}
+
+.application-filters button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #0f766e;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.application-filters button:hover {
+  background: #115e59;
+}
+
+.results-count {
+  margin: 12px 0 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.no-results {
+  padding: 25px;
+  text-align: center;
+  color: #64748b;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+/* View Application Details Button */
+.view-details-btn {
+  margin-top: 12px;
+  padding: 11px 18px;
+  border: 1px solid #0f766e;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f766e;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.view-details-btn:hover {
+  background: #0f766e;
+  color: #ffffff;
+}
+
+/* Modal Background */
+.application-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* Modal Container */
+.application-modal {
+  width: 100%;
+  max-width: 850px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  animation: modalFadeIn 0.25s ease;
+  box-sizing: border-box;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header */
+.application-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.application-modal-header h2 {
+  margin: 0 0 7px;
+  color: #0f172a;
+  font-size: 24px;
+}
+
+.application-modal-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.modal-close-btn:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Details Sections */
+.detail-section {
+  margin-top: 22px;
+  padding: 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.detail-section h3 {
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  color: #0f766e;
+  font-size: 17px;
+  border-bottom: 1px solid #ccfbf1;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.detail-grid > div {
+  min-width: 0;
+}
+
+.detail-section label {
+  display: block;
+  margin-bottom: 6px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.detail-section p {
+  margin: 0;
+  color: #1e293b;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.detail-full-width {
+  grid-column: 1 / -1;
+}
+
+.cover-letter-text {
+  white-space: pre-wrap;
+}
+
+.detail-status {
+  color: #0f766e !important;
+  font-weight: 700;
+}
+
+/* Resume */
+.resume-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.resume-details a {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #0f766e;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.resume-details a:hover {
+  background: #115e59;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 22px;
+}
+
+.modal-footer button {
+  padding: 11px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-footer button:hover {
+  background: #334155;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 20px;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .application-filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-heading h1 {
+    font-size: 25px;
+  }
+
+  .application-modal-overlay {
+    padding: 10px;
+  }
+
+  .application-modal {
+    padding: 18px;
+    max-height: 94vh;
+  }
+
+  .application-modal-header h2 {
+    font-size: 20px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .detail-full-width {
+    grid-column: auto;
+  }
+
+  .detail-section {
+    padding: 15px;
+  }
+
+  .resume-details {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* =========================================
+   MANAGE JOBS SECTION
+========================================= */
+
+.admin-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 12px;
+}
+
+.admin-tab-btn {
+  padding: 11px 20px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.admin-tab-btn:hover,
+.admin-tab-btn.active {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #ffffff;
+}
+
+.manage-jobs-section {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.manage-jobs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.manage-jobs-header h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.add-job-btn,
+.job-submit-btn {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #0f766e;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.add-job-btn:hover,
+.job-submit-btn:hover {
+  background: #115e59;
+}
+
+.job-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 25px;
+  padding: 22px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.job-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.job-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.job-form-group label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.job-form-group input,
+.job-form-group select,
+.job-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.job-form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.job-form-group input:focus,
+.job-form-group select:focus,
+.job-form-group textarea:focus {
+  border-color: #0d9488;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
+}
+
+.job-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  grid-column: 1 / -1;
+}
+
+.job-cancel-btn {
+  padding: 11px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #475569;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.job-cancel-btn:hover {
+  background: #f1f5f9;
+}
+
+.admin-job-card {
+  margin-bottom: 16px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  transition: 0.25s ease;
+}
+
+.admin-job-card:hover {
+  box-shadow: 0 5px 16px rgba(15, 23, 42, 0.07);
+}
+
+.admin-job-card h3 {
+  margin: 0 0 12px;
+  color: #0f766e;
+  font-size: 19px;
+}
+
+.admin-job-card p {
+  margin: 8px 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.admin-job-card strong {
+  color: #1e293b;
+}
+
+.job-status {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  background: #ccfbf1;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.job-status.closed {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.job-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.job-edit-btn,
+.job-delete-btn {
+  padding: 9px 15px;
+  border: none;
+  border-radius: 7px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.job-edit-btn {
+  background: #0f766e;
+}
+
+.job-edit-btn:hover {
+  background: #115e59;
+}
+
+.job-delete-btn {
+  background: #dc2626;
+}
+
+.job-delete-btn:hover {
+  background: #b91c1c;
+}
+
+.job-feedback {
+  margin: 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.job-success {
+  color: #15803d;
+}
+
+.job-error {
+  color: #dc2626;
+}
+
+/* Manage Jobs Responsive Design */
+@media (max-width: 600px) {
+  .admin-tabs {
+    flex-direction: column;
+  }
+
+  .admin-tab-btn {
+    width: 100%;
+  }
+
+  .job-form {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .job-form-group.full-width {
+    grid-column: auto;
+  }
+
+  .manage-jobs-section {
+    padding: 16px;
+  }
+
+  .manage-jobs-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

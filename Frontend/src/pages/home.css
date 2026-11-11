@@ -1007,3 +1007,65 @@ footer p {
     font-size: 28px;
   }
 }
+
+/* =========================================
+   LOGIN DROPDOWN
+========================================= */
+
+/* INTERACTIVE LOGIN DROPDOWN */
+
+/* Login Dropdown */
+.login-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-links .login-dropdown .login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: transparent;
+  border: 1px solid #14b8a6;
+  border-radius: 7px;
+  color: #5eead4;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-links .login-dropdown .login-btn:hover {
+  background: #0f766e;
+  color: white;
+}
+
+.login-dropdown .login-menu {
+  position: absolute !important;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 210px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px;
+  padding: 8px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+}
+
+.login-dropdown .login-menu a {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+.login-dropdown .login-menu a:hover {
+  background: #134e4a;
+  color: #5eead4 !important;}

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ApplicationForm.css";
@@ -10,6 +11,8 @@ function ApplicationForm() {
   const job = location.state?.job;
 
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -29,72 +32,138 @@ function ApplicationForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
-  // Handle resume
+  // Handle resume selection
   const handleResumeChange = (e) => {
-    setResume(e.target.files[0]);
-  };
+    const file = e.target.files?.[0] || null;
 
-  // Submit application
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    setSubmitError("");
+    setResume(null);
 
-    if (!job) {
-      alert("Please select a job first.");
-      navigate("/jobs");
+    if (!file) return;
+
+    const allowedExtensions = /\.(pdf|doc|docx)$/i;
+
+    if (!allowedExtensions.test(file.name)) {
+      setSubmitError("Please select a PDF, DOC, or DOCX resume.");
+      e.target.value = "";
       return;
     }
 
-    const newApplication = {
-      id: Date.now(),
+    if (file.size > 5 * 1024 * 1024) {
+      setSubmitError("Resume size must not exceed 5 MB.");
+      e.target.value = "";
+      return;
+    }
 
-      role: job.role || "Job Position",
-      company: job.company || "Company",
-      location: job.location || "Not specified",
-      salary: job.salary || "Not specified",
+    setResume(file);
+  };
 
-      appliedDate: new Date().toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }),
+  // Submit complete application and resume to the backend
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitError("");
 
-      status: "Under Review",
+    if (!job) {
+      setSubmitError("Please select a job before applying.");
+      return;
+    }
 
-      applicant: {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        course: formData.course,
-        college: formData.college,
-        graduationYear: formData.graduationYear,
-        cgpa: formData.cgpa,
-        skills: formData.skills,
-        coverLetter: formData.coverLetter,
-      },
-    };
+    // Get logged-in student
+    let student;
 
-    // Get old applications
-    const existingApplications =
-      JSON.parse(localStorage.getItem("applications")) || [];
+    try {
+      student = JSON.parse(sessionStorage.getItem("student") || "null");
+    } catch {
+      student = null;
+    }
 
-    // Add new application
-    existingApplications.push(newApplication);
+    if (!student || !(student.id || student._id)) {
+      setSubmitError("Please log in before submitting your application.");
+      return;
+    }
 
-    // Save applications
-    localStorage.setItem(
-      "applications",
-      JSON.stringify(existingApplications)
-    );
+    if (!resume) {
+      setSubmitError("Please upload your resume.");
+      return;
+    }
 
-    console.log("Application Saved:", newApplication);
+    // Validate graduation year
+    const graduationYear = Number(formData.graduationYear);
 
-    setSubmitted(true);
+    if (
+      !Number.isInteger(graduationYear) ||
+      graduationYear < 1900 ||
+      graduationYear > 2200
+    ) {
+      setSubmitError("Please enter a valid graduation year.");
+      return;
+    }
+
+    // Validate CGPA
+    const cgpa = Number(formData.cgpa);
+
+    if (!Number.isFinite(cgpa) || cgpa < 0 || cgpa > 10) {
+      setSubmitError("CGPA must be between 0 and 10.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      // FormData sends text fields and the resume file together
+      const body = new FormData();
+
+      body.append("studentId", student.id || student._id);
+      body.append("company", job.company || "Company");
+      body.append("jobTitle", job.role || "Job Position");
+      body.append("location", job.location || "Not specified");
+      body.append("salary", job.salary || "Not specified");
+
+      Object.entries(formData).forEach(([key, value]) => {
+        body.append(key, value);
+      });
+
+      body.append("resume", resume);
+
+      const response = await fetch(
+        "http://localhost:5000/api/applications",
+        {
+          method: "POST",
+          body,
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        const missingFields = data.missingFields?.length
+          ? ` Missing fields: ${data.missingFields.join(", ")}.`
+          : "";
+
+        throw new Error(
+          (data.message || "Failed to submit application.") +
+            missingFields
+        );
+      }
+
+      console.log("Application saved:", data.application);
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Application submission error:", error);
+
+      setSubmitError(
+        error.message ||
+          "Unable to submit your application. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // If no job was selected
@@ -121,53 +190,36 @@ function ApplicationForm() {
   if (submitted) {
     return (
       <div className="application-success">
-
-        <div className="success-icon">
-          ✓
-        </div>
+        <div className="success-icon">✓</div>
 
         <h1>Application Submitted!</h1>
 
         <p>
           Your application for{" "}
-          <strong>{job.role}</strong> at{" "}
-          <strong>{job.company}</strong> has been submitted
-          successfully.
+          <strong>{job.role || "Job Position"}</strong> at{" "}
+          <strong>{job.company || "Company"}</strong> has been
+          submitted successfully.
         </p>
 
         <div className="success-buttons">
-
-          <button
-            onClick={() => navigate("/applications")}
-          >
+          <button onClick={() => navigate("/applications")}>
             View My Applications
           </button>
 
-          <button
-            onClick={() => navigate("/jobs")}
-          >
+          <button onClick={() => navigate("/jobs")}>
             Browse More Jobs
           </button>
-
         </div>
-
       </div>
     );
   }
 
   return (
     <div className="application-page">
-
-      {/* =========================
-          Sidebar
-      ========================== */}
-
+      {/* Sidebar */}
       <aside className="application-sidebar">
-
         <div className="sidebar-logo">
-          <div className="logo-icon">
-            🎓
-          </div>
+          <div className="logo-icon">🎓</div>
 
           <h2>
             Placement<span>Portal</span>
@@ -175,7 +227,6 @@ function ApplicationForm() {
         </div>
 
         <nav className="sidebar-menu">
-
           <button onClick={() => navigate("/dashboard")}>
             🏠 Dashboard
           </button>
@@ -188,35 +239,29 @@ function ApplicationForm() {
             💼 Job Opportunities
           </button>
 
-          <button
-            onClick={() => navigate("/applications")}
-          >
+          <button onClick={() => navigate("/applications")}>
             📋 My Applications
           </button>
-
         </nav>
 
         <div className="sidebar-bottom">
-
-          <button onClick={() => navigate("/")}>
+          <button
+            onClick={() => {
+              sessionStorage.removeItem("student");
+              navigate("/");
+            }}
+          >
             🚪 Logout
           </button>
-
         </div>
-
       </aside>
 
-      {/* =========================
-          Main Content
-      ========================== */}
-
+      {/* Main Content */}
       <main className="application-main">
-
         {/* Header */}
-
         <div className="application-header">
-
           <button
+            type="button"
             className="back-btn"
             onClick={() => navigate(-1)}
           >
@@ -228,82 +273,61 @@ function ApplicationForm() {
           <p>
             Complete the form below to apply for this position.
           </p>
-
         </div>
 
-
         {/* Selected Job */}
-
         <div className="selected-job-card">
-
           <div className="selected-job-logo">
-            {job.company
-              ? job.company.charAt(0)
-              : "C"}
+            {job.company ? job.company.charAt(0) : "C"}
           </div>
 
           <div className="selected-job-info">
+            <h2>{job.role || "Job Position"}</h2>
 
-            <h2>
-              {job.role || "Job Position"}
-            </h2>
-
-            <p>
-              {job.company || "Company"}
-            </p>
+            <p>{job.company || "Company"}</p>
 
             <div className="selected-job-details">
+              <span>📍 {job.location || "Not specified"}</span>
 
-              <span>
-                📍 {job.location || "Not specified"}
-              </span>
-
-              <span>
-                💰 {job.salary || "Not specified"}
-              </span>
+              <span>💰 {job.salary || "Not specified"}</span>
 
               {job.experience && (
-                <span>
-                  💼 {job.experience}
-                </span>
+                <span>💼 {job.experience}</span>
               )}
-
             </div>
-
           </div>
-
         </div>
 
-
         {/* Application Form */}
-
-        <form
-          className="application-form"
-          onSubmit={handleSubmit}
-        >
+        <form className="application-form" onSubmit={handleSubmit}>
+          {submitError && (
+            <p
+              role="alert"
+              style={{
+                color: "#b91c1c",
+                background: "#fef2f2",
+                border: "1px solid #fecaca",
+                padding: "12px",
+                borderRadius: "8px",
+              }}
+            >
+              {submitError}
+            </p>
+          )}
 
           {/* Personal Information */}
-
           <section className="form-section">
-
             <div className="form-section-title">
               <h2>Personal Information</h2>
-
-              <p>
-                Enter your basic personal details.
-              </p>
+              <p>Enter your basic personal details.</p>
             </div>
 
-
             <div className="form-grid">
-
               <div className="form-group">
-
-                <label>
-                  Full Name *
-                </label>
+                <label htmlFor="fullName">Full Name *</label>
 
                 <input
+                  id="fullName"
                   type="text"
                   name="fullName"
                   value={formData.fullName}
@@ -311,17 +335,13 @@ function ApplicationForm() {
                   placeholder="Enter your full name"
                   required
                 />
-
               </div>
 
-
               <div className="form-group">
-
-                <label>
-                  Email *
-                </label>
+                <label htmlFor="email">Email *</label>
 
                 <input
+                  id="email"
                   type="email"
                   name="email"
                   value={formData.email}
@@ -329,17 +349,13 @@ function ApplicationForm() {
                   placeholder="Enter your email"
                   required
                 />
-
               </div>
 
-
               <div className="form-group">
-
-                <label>
-                  Phone Number *
-                </label>
+                <label htmlFor="phone">Phone Number *</label>
 
                 <input
+                  id="phone"
                   type="tel"
                   name="phone"
                   value={formData.phone}
@@ -347,38 +363,23 @@ function ApplicationForm() {
                   placeholder="Enter your phone number"
                   required
                 />
-
               </div>
-
             </div>
-
           </section>
 
-
           {/* Education */}
-
           <section className="form-section">
-
             <div className="form-section-title">
-
               <h2>Education Details</h2>
-
-              <p>
-                Provide your academic information.
-              </p>
-
+              <p>Provide your academic information.</p>
             </div>
 
-
             <div className="form-grid">
-
               <div className="form-group">
-
-                <label>
-                  Course *
-                </label>
+                <label htmlFor="course">Course *</label>
 
                 <input
+                  id="course"
                   type="text"
                   name="course"
                   value={formData.course}
@@ -386,17 +387,13 @@ function ApplicationForm() {
                   placeholder="e.g. MCA"
                   required
                 />
-
               </div>
 
-
               <div className="form-group">
-
-                <label>
-                  College / University *
-                </label>
+                <label htmlFor="college">College / University *</label>
 
                 <input
+                  id="college"
                   type="text"
                   name="college"
                   value={formData.college}
@@ -404,36 +401,32 @@ function ApplicationForm() {
                   placeholder="Enter college name"
                   required
                 />
-
               </div>
 
-
               <div className="form-group">
-
-                <label>
-                  Graduation Year *
-                </label>
+                <label htmlFor="graduationYear">Graduation Year *</label>
 
                 <input
+                  id="graduationYear"
                   type="number"
                   name="graduationYear"
+                  min="1900"
+                  max="2200"
                   value={formData.graduationYear}
                   onChange={handleChange}
                   placeholder="2027"
                   required
                 />
-
               </div>
 
-
               <div className="form-group">
-
-                <label>
-                  CGPA *
-                </label>
+                <label htmlFor="cgpa">CGPA (out of 10) *</label>
 
                 <input
+                  id="cgpa"
                   type="number"
+                  min="0"
+                  max="10"
                   step="0.01"
                   name="cgpa"
                   value={formData.cgpa}
@@ -441,36 +434,22 @@ function ApplicationForm() {
                   placeholder="e.g. 9.17"
                   required
                 />
-
               </div>
-
             </div>
-
           </section>
 
-
           {/* Skills */}
-
           <section className="form-section">
-
             <div className="form-section-title">
-
               <h2>Skills</h2>
-
-              <p>
-                Mention your technical skills.
-              </p>
-
+              <p>Mention your technical skills.</p>
             </div>
 
-
             <div className="form-group">
-
-              <label>
-                Technical Skills *
-              </label>
+              <label htmlFor="skills">Technical Skills *</label>
 
               <input
+                id="skills"
                 type="text"
                 name="skills"
                 value={formData.skills}
@@ -478,35 +457,22 @@ function ApplicationForm() {
                 placeholder="Java, React, JavaScript, MongoDB..."
                 required
               />
-
             </div>
-
           </section>
 
-
           {/* Resume */}
-
           <section className="form-section">
-
             <div className="form-section-title">
-
               <h2>Resume</h2>
-
-              <p>
-                Upload your latest resume.
-              </p>
-
+              <p>Upload your latest resume.</p>
             </div>
 
-
             <div className="resume-upload">
-
-              <label htmlFor="resume">
-                📄 Choose Resume
-              </label>
+              <label htmlFor="resume">📄 Choose Resume</label>
 
               <input
                 id="resume"
+                name="resume"
                 type="file"
                 accept=".pdf,.doc,.docx"
                 onChange={handleResumeChange}
@@ -518,31 +484,23 @@ function ApplicationForm() {
                   Selected: {resume.name}
                 </p>
               )}
-
             </div>
-
           </section>
 
-
           {/* Cover Letter */}
-
           <section className="form-section">
-
             <div className="form-section-title">
-
               <h2>Cover Letter</h2>
 
               <p>
                 Tell the recruiter why you are suitable for
                 this position.
               </p>
-
             </div>
 
-
             <div className="form-group">
-
               <textarea
+                id="coverLetter"
                 name="coverLetter"
                 value={formData.coverLetter}
                 onChange={handleChange}
@@ -550,20 +508,16 @@ function ApplicationForm() {
                 rows="6"
                 required
               />
-
             </div>
-
           </section>
 
-
           {/* Submit */}
-
           <div className="form-submit">
-
             <button
               type="button"
               className="cancel-btn"
               onClick={() => navigate("/jobs")}
+              disabled={submitting}
             >
               Cancel
             </button>
@@ -571,16 +525,13 @@ function ApplicationForm() {
             <button
               type="submit"
               className="submit-btn"
+              disabled={submitting}
             >
-              Submit Application →
+              {submitting ? "Submitting..." : "Submit Application →"}
             </button>
-
           </div>
-
         </form>
-
       </main>
-
     </div>
   );
 }
