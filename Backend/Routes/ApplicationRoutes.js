@@ -5,9 +5,9 @@ const path = require("path");
 const fs = require("fs/promises");
 
 const Application = require("../models/Application");
-const Student = require("../models/Student");
-const uploadResume = require("../middleware/resumeUpload");
-const adminAuth = require("../middleware/adminAuth");
+const Student = require("../models/student");
+const uploadResume = require("../Middleware/ResumeUpload");
+const adminAuth = require("../Middleware/AdminAuth");
 
 const router = express.Router();
 

@@ -13,9 +13,9 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 
-const authRoutes = require("./routes/authRoutes");
-const applicationRoutes = require("./routes/applicationRoutes");
-const jobRoutes = require("./routes/jobsRoutes");
+const authRoutes = require("./Routes/authRoutes");
+const applicationRoutes = require("./Routes/applicationRoutes");
+const jobRoutes = require("./Routes/jobsRoutes");
 
 const app = express();
 

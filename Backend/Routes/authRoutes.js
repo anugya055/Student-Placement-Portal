@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const Student = require("../models/Student");
+const Student = require("../models/student");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();

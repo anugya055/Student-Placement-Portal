@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const Job = require("../models/Job");
-const adminAuth = require("../middleware/adminAuth");
+const adminAuth = require("../Middleware/AdminAuth");
 
 const router = express.Router();
 
