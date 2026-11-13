@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Jobs.css";
+import { API_BASE_URL } from "../apiConfig";
 
-const API_URL = "http://localhost:5000/api/jobs";
+const API_URL = `${API_BASE_URL}/jobs`;
 
 // Format date for display
 const formatDate = (dateValue) => {

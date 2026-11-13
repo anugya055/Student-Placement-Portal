@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Profile.css";
+import { API_BASE_URL, SERVER_URL } from "../apiConfig";
 
-const API_URL = "http://localhost:5000/api/auth";
-const SERVER_URL = "http://localhost:5000";
+const API_URL = `${API_BASE_URL}/auth`;
 
 function Profile() {
   const [editing, setEditing] = useState(false);

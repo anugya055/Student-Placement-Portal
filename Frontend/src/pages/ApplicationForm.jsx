@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./ApplicationForm.css";
+import { API_BASE_URL } from "../apiConfig";
 
 function ApplicationForm() {
   const location = useLocation();
@@ -132,7 +133,7 @@ function ApplicationForm() {
       body.append("resume", resume);
 
       const response = await fetch(
-        "http://localhost:5000/api/applications",
+        `${API_BASE_URL}/applications`,
         {
           method: "POST",
           body,

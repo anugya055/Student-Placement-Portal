@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import "./Register.css";
+import { API_BASE_URL } from "../apiConfig";
 
 function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +72,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        `${API_BASE_URL}/auth/register`,
         {
           method: "POST",
           headers: {

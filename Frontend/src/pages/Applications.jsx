@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Applications.css";
+import { API_BASE_URL } from "../apiConfig";
 
 function Applications() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Applications() {
         }
 
         const response = await fetch(
-          `http://localhost:5000/api/applications/${studentId}`
+          `${API_BASE_URL}/applications/${studentId}`
         );
         const data = await response.json();
 

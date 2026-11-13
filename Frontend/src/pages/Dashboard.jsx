@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-
-const API_URL = "http://localhost:5000/api/auth";
-const APPLICATIONS_API_URL = "http://localhost:5000/api/applications";
+import { API_BASE_URL } from "../apiConfig";
+const API_URL = `${API_BASE_URL}/auth`;
+const APPLICATIONS_API_URL = `${API_BASE_URL}/applications`;
 
 function Dashboard() {
   const navigate = useNavigate();

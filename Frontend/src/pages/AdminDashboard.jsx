@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
+import { API_BASE_URL, SERVER_URL } from "../apiConfig";
 
-const API_URL = "http://localhost:5000/api/applications";
-const JOBS_API_URL = "http://localhost:5000/api/jobs";
-const SERVER_URL = "http://localhost:5000";
+const API_URL = `${API_BASE_URL}/applications`;
+const JOBS_API_URL = `${API_BASE_URL}/jobs`;
 
 const ALLOWED_STATUSES = [
   "Applied",
